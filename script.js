@@ -144,10 +144,19 @@
     el.levelMinutes.addEventListener("input", updateLevelMinutes);
     el.levelMinutes.addEventListener("change", updateLevelMinutes);
 
-    el.actionStart.addEventListener("click", startActionTimer);
-    el.nextPlayer.addEventListener("click", nextPlayer);
+    el.actionStart.addEventListener("click", () => {
+      unlockAudio();
+      startActionTimer();
+    });
+    el.nextPlayer.addEventListener("click", () => {
+      unlockAudio();
+      nextPlayer();
+    });
     el.actionReset.addEventListener("click", resetActionTimer);
-    el.levelStart.addEventListener("click", startLevelTimer);
+    el.levelStart.addEventListener("click", () => {
+      unlockAudio();
+      startLevelTimer();
+    });
     el.levelStop.addEventListener("click", stopLevelTimer);
     el.levelReset.addEventListener("click", resetLevelTimer);
     el.levelUp.addEventListener("click", () => changeLevel(1, true));
@@ -350,9 +359,29 @@
     renderCurrentBlinds();
   }
 
+  function unlockAudio() {
+    try {
+      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+      if (!AudioContextClass) {
+        return;
+      }
+
+      audioContext = audioContext || new AudioContextClass();
+      if (audioContext.state === "suspended") {
+        audioContext.resume();
+      }
+    } catch (error) {
+      // iOS may still refuse audio until a trusted tap; later taps will retry.
+    }
+  }
+
   function fireAlarm(frequency, duration) {
     try {
-      audioContext = audioContext || new (window.AudioContext || window.webkitAudioContext)();
+      unlockAudio();
+      if (!audioContext || audioContext.state === "suspended") {
+        return;
+      }
+
       const oscillator = audioContext.createOscillator();
       const gain = audioContext.createGain();
       oscillator.type = "square";
