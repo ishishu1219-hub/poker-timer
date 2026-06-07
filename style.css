@@ -1,0 +1,350 @@
+:root {
+  color-scheme: dark;
+  --bg: #0b0f14;
+  --panel: #121922;
+  --panel-strong: #182231;
+  --text: #f7fbff;
+  --muted: #9aa8b8;
+  --line: #263445;
+  --accent: #15c2a8;
+  --accent-strong: #35e0bf;
+  --danger: #ff4d5f;
+  --warning: #f2b84b;
+  --button: #1e7bff;
+  --button-dark: #20324a;
+  --shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(circle at 15% 15%, rgba(21, 194, 168, 0.16), transparent 28rem),
+    linear-gradient(135deg, #070a0e 0%, var(--bg) 48%, #11161f 100%);
+  color: var(--text);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  overflow-x: hidden;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  min-height: 52px;
+  border: 0;
+  border-radius: 8px;
+  padding: 0.85rem 1.2rem;
+  background: linear-gradient(180deg, #2687ff, var(--button));
+  color: #fff;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 8px 18px rgba(30, 123, 255, 0.25);
+  touch-action: manipulation;
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+button.secondary {
+  background: var(--button-dark);
+  color: #dce8f5;
+  box-shadow: none;
+}
+
+input {
+  width: 5.8rem;
+  min-height: 48px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 0.4rem 0.65rem;
+  background: #071018;
+  color: var(--text);
+  font-size: 1.2rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+.app-shell {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) minmax(0, 1fr) auto;
+  gap: clamp(0.55rem, 1.3vw, 1rem);
+  min-height: 100dvh;
+  padding: max(0.8rem, env(safe-area-inset-top)) max(0.8rem, env(safe-area-inset-right)) max(0.8rem, env(safe-area-inset-bottom)) max(0.8rem, env(safe-area-inset-left));
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: clamp(0.9rem, 2.4vw, 1.5rem);
+  background: rgba(18, 25, 34, 0.92);
+  box-shadow: var(--shadow);
+}
+
+.panel-head,
+.current-blinds {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.eyebrow {
+  margin: 0 0 0.15rem;
+  color: var(--accent-strong);
+  font-size: clamp(0.76rem, 1.5vw, 0.95rem);
+  font-weight: 900;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+h1,
+h2 {
+  margin: 0;
+  font-size: clamp(1.1rem, 2.6vw, 1.75rem);
+  line-height: 1.1;
+}
+
+.setting {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+  font-weight: 800;
+}
+
+.time-display {
+  margin: clamp(0.35rem, 1vw, 0.65rem) 0;
+  font-variant-numeric: tabular-nums;
+  font-weight: 950;
+  line-height: 0.95;
+  text-align: center;
+  text-shadow: 0 8px 26px rgba(0, 0, 0, 0.4);
+}
+
+.time-display.seconds {
+  font-size: clamp(5.5rem, 23vw, 14rem);
+  color: var(--accent-strong);
+}
+
+.time-display.minutes {
+  font-size: clamp(4rem, 15vw, 10rem);
+  color: #f8fbff;
+}
+
+.status-line {
+  min-height: 1.6rem;
+  color: var(--muted);
+  font-size: clamp(0.9rem, 1.8vw, 1.2rem);
+  font-weight: 900;
+  text-align: center;
+}
+
+.status-line.alert {
+  color: var(--danger);
+}
+
+.status-line.level-alert {
+  color: var(--warning);
+}
+
+.button-row,
+.level-buttons,
+.editor-tools {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.6rem;
+  margin-top: 0.7rem;
+}
+
+.level-buttons {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  min-width: min(20rem, 48vw);
+  margin-top: 0;
+}
+
+.blind-readout {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.65rem;
+  margin-top: 0.85rem;
+}
+
+.blind-card {
+  min-height: clamp(7rem, 16vh, 10rem);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: clamp(0.75rem, 2vw, 1.1rem);
+  background: var(--panel-strong);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.blind-card span {
+  color: var(--muted);
+  font-size: clamp(0.85rem, 1.7vw, 1.05rem);
+  font-weight: 900;
+}
+
+.blind-card strong {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  font-size: clamp(2.7rem, 8vw, 6rem);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.level-card strong {
+  color: var(--accent-strong);
+}
+
+.structure-editor {
+  margin-top: 0.8rem;
+  border-top: 1px solid var(--line);
+  padding-top: 0.8rem;
+}
+
+summary {
+  cursor: pointer;
+  color: #d9e8f4;
+  font-size: 1rem;
+  font-weight: 900;
+}
+
+.editor-tools {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  max-width: 28rem;
+}
+
+.table-wrap {
+  max-height: 34vh;
+  margin-top: 0.8rem;
+  overflow: auto;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #0e151d;
+}
+
+th,
+td {
+  border-bottom: 1px solid var(--line);
+  padding: 0.55rem;
+  text-align: center;
+}
+
+th {
+  position: sticky;
+  top: 0;
+  background: #16202b;
+  color: var(--muted);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+}
+
+td input {
+  width: min(9rem, 100%);
+}
+
+td button {
+  min-height: 44px;
+  padding: 0.55rem 0.8rem;
+  background: #3b1f2a;
+  color: #ffd7df;
+  box-shadow: none;
+}
+
+body.flash {
+  animation: flash-screen 0.28s steps(2, end) infinite;
+}
+
+@keyframes flash-screen {
+  0% {
+    background-color: #fffbf0;
+  }
+  100% {
+    background-color: #32040b;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 540px) {
+  .app-shell {
+    grid-template-columns: 1.1fr 1.1fr 1.4fr;
+    grid-template-rows: 1fr;
+  }
+
+  .time-display.seconds {
+    font-size: clamp(4rem, 16vh, 7rem);
+  }
+
+  .time-display.minutes {
+    font-size: clamp(3.2rem, 14vh, 6rem);
+  }
+
+  .blind-readout {
+    gap: 0.45rem;
+  }
+
+  .blind-card {
+    min-height: 5.7rem;
+  }
+
+  .blind-card strong {
+    font-size: clamp(2.2rem, 9vh, 4.2rem);
+  }
+
+  .button-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .app-shell {
+    padding: 0.6rem;
+  }
+
+  .panel-head,
+  .current-blinds {
+    align-items: flex-start;
+  }
+
+  .button-row {
+    grid-template-columns: 1fr;
+  }
+
+  .blind-readout {
+    grid-template-columns: 1fr;
+  }
+
+  .blind-card {
+    min-height: 5.5rem;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .level-buttons {
+    min-width: 0;
+    width: 100%;
+  }
+}

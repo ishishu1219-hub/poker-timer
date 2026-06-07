@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Texas Hold'em Tournament Timer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app-shell">
+    <section class="panel action-panel" aria-labelledby="action-title">
+      <div class="panel-head">
+        <div>
+          <p class="eyebrow">Action Timer</p>
+          <h1 id="action-title">Action Clock</h1>
+        </div>
+        <label class="setting">
+          <span>sec</span>
+          <input id="actionSeconds" type="number" min="5" max="300" step="5" inputmode="numeric" aria-label="Action seconds">
+        </label>
+      </div>
+      <div id="actionTime" class="time-display seconds">30</div>
+      <div id="actionStatus" class="status-line" aria-live="polite">READY</div>
+      <div class="button-row">
+        <button id="actionStart" type="button">Start</button>
+        <button id="nextPlayer" type="button">Next</button>
+        <button id="actionReset" type="button" class="secondary">Reset</button>
+      </div>
+    </section>
+
+    <section class="panel level-panel" aria-labelledby="level-title">
+      <div class="panel-head">
+        <div>
+          <p class="eyebrow">Blind Level Timer</p>
+          <h2 id="level-title">Blind Level</h2>
+        </div>
+        <label class="setting">
+          <span>min</span>
+          <input id="levelMinutes" type="number" min="1" max="180" step="1" inputmode="numeric" aria-label="Level minutes">
+        </label>
+      </div>
+      <div id="levelTime" class="time-display minutes">10:00</div>
+      <div id="levelStatus" class="status-line" aria-live="polite">LEVEL TIMER READY</div>
+      <div class="button-row">
+        <button id="levelStart" type="button">Start</button>
+        <button id="levelStop" type="button" class="secondary">Stop</button>
+        <button id="levelReset" type="button" class="secondary">Reset</button>
+      </div>
+    </section>
+
+    <section class="panel blinds-panel" aria-labelledby="current-level-title">
+      <div class="current-blinds">
+        <div>
+          <p class="eyebrow">Current Blinds</p>
+          <h2 id="current-level-title">Current</h2>
+        </div>
+        <div class="level-buttons">
+          <button id="levelDown" type="button" class="secondary">Level -</button>
+          <button id="levelUp" type="button">Level +</button>
+        </div>
+      </div>
+
+      <div class="blind-readout">
+        <div class="blind-card level-card">
+          <span>Level</span>
+          <strong id="currentLevel">1</strong>
+        </div>
+        <div class="blind-card">
+          <span>SB</span>
+          <strong id="currentSB">100</strong>
+        </div>
+        <div class="blind-card">
+          <span>BB</span>
+          <strong id="currentBB">200</strong>
+        </div>
+      </div>
+
+      <details class="structure-editor">
+        <summary>Edit Blind Structure</summary>
+        <div class="editor-tools">
+          <button id="addLevel" type="button">Add Level</button>
+          <button id="saveStructure" type="button" class="secondary">Save</button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Level</th>
+                <th>SB</th>
+                <th>BB</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="structureBody"></tbody>
+          </table>
+        </div>
+      </details>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
